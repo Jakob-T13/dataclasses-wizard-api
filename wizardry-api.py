@@ -3,6 +3,17 @@ from dataclasses import dataclass
 #using Wizard World API at https://wizard-world-api.herokuapp.com/swagger/index.html
 
 @dataclass
+class Wizard:
+    wizard_id: str
+    first_name: str
+    last_name: str
+    
+@dataclass
+class Ingredient:
+    ingredient_id: str
+    name: str
+
+@dataclass
 class Elixir:
     elixir_id: str
     name: str
@@ -28,11 +39,6 @@ class House:
     heads: List[Wizard]
     
 @dataclass
-class Ingredient:
-    ingredient_id: str
-    name: str
-    
-@dataclass
 class Spell:
     spell_id: str
     name: str
@@ -43,9 +49,3 @@ class Spell:
     light: str
     creator: str
     
-@dataclass
-class Wizard:
-    wizard_id: str
-    first_name: str
-    last_name: str
-    elixirs: List[Elixir]
