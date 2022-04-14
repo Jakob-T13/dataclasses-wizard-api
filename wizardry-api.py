@@ -67,8 +67,18 @@ for row in data:
     characteristic = row['characteristics']
     time = row['time']
     difficulty = row['difficulty']
-    ingredients = [Ingredient(ing_row['id'],ing_row['name']) for ing_row in row['ingredients']] 
-    inventors = [Wizard(wiz_row['id'], wiz_row['firstName'], wiz_row['lastName']) for wiz_row in row['inventors']]
+
+    # BUILDING LISTS OF OBJECTS INSIDE OF AN OBJECT
+    # ingredients = [Ingredient(ing_row['id'],ing_row['name']) for ing_row in row['ingredients']] 
+    ingredients = []
+    for ing_row in row['ingredients']:
+        ingredients.append(Ingredient(ing_row['id'], ing_row['name']))
+
+    # inventors = [Wizard(wiz_row['id'], wiz_row['firstName'], wiz_row['lastName']) for wiz_row in row['inventors']]
+    inventors = []
+    for wiz_row in row['inventors']:
+        inventors.append(Wizard(wiz_row['id'], wiz_row['firstName'], wiz_row['lastName']))
+    
     manufacturer = row['manufacturer']
     elixirs.append(Elixir(elixir_id, name, effect, side_effects, characteristic, time, difficulty, ingredients, inventors, manufacturer))
 
