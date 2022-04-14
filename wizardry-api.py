@@ -58,12 +58,13 @@ try:
     wizards_req = requests.get("https://wizard-world-api.herokuapp.com/wizards/")
 except:
     print("could not connect to API")
+    exit(1)
     
 wizards_json = wizards_req.json()
 
-wizard_raw_lst = []
-for i in range(len(wizards_json)):
-    wizard_raw_lst.append(wizards_json[i])
-
-for i in wizard_raw_lst:
-    print(i["firstName"])
+for i in wizards_json:
+    new_wizard = Wizard(i["id"],i["firstName"],i["lastName"])
+    wizardlst.append(new_wizard)
+    
+for i in wizardlst:
+    print(f"{i.last_name}, {i.first_name}")
