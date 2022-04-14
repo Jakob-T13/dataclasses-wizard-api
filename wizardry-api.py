@@ -60,4 +60,10 @@ except:
     print("could not connect to API")
     
 wizards_json = wizards_req.json()
-# print(wizards_json)
+
+wizard_raw_lst = []
+for i in range(len(wizards_json)):
+    wizard_raw_lst.append(wizards_json[i])
+
+for i in wizard_raw_lst:
+    print(i["firstName"])
