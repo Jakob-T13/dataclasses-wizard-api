@@ -1,4 +1,7 @@
 from dataclasses import dataclass
+from typing import List
+import json
+import requests
 
 #using Wizard World API at https://wizard-world-api.herokuapp.com/swagger/index.html
 
@@ -49,3 +52,12 @@ class Spell:
     light: str
     creator: str
     
+wizardlst = []
+
+try:
+    wizards_req = requests.get("https://wizard-world-api.herokuapp.com/wizards/")
+except:
+    print("could not connect to API")
+    
+wizards_json = wizards_req.json()
+# print(wizards_json)
