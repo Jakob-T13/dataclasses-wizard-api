@@ -56,19 +56,20 @@ class Spell:
 
 elixir_url = 'https://wizard-world-api.herokuapp.com/Elixirs'
 response = requests.get(elixir_url)
-data = json.loads(response)
-for key, value in data.iteritems():
-
+data = response.json()
 
 elixirs = []
 for row in data:
-    elixir_id = row['elixir_id']
+    elixir_id = row['id']
     name = row['name']
     effect = row['effect']
-    side_effects = row['side_effects']
+    side_effects = row['sideEffects']
     characteristic = row['characteristics']
     time = row['time']
     difficulty = row['difficulty']
-    ingredients = [Ingredient(ing_row['ingredient_id'],ing_row['name']) for ing_row in row['ingredients']] 
-    ingredients = [Wizard(ing_row['ingredient_id'],ing_row['name']) for wiz_row in row['inventors']]
-    elixirs.append(Elixir(elixir_id, name, effect, side_effects)
+    ingredients = [Ingredient(ing_row['id'],ing_row['name']) for ing_row in row['ingredients']] 
+    inventors = [Wizard(wiz_row['id'], wiz_row['firstName'], wiz_row['lastName']) for wiz_row in row['inventors']]
+    manufacturer = row['manufacturer']
+    elixirs.append(Elixir(elixir_id, name, effect, side_effects, characteristic, time, difficulty, ingredients, inventors, manufacturer))
+
+print(elixirs)
