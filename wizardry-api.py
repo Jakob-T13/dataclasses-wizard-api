@@ -66,5 +66,24 @@ for i in wizards_json:
     new_wizard = Wizard(i["id"],i["firstName"],i["lastName"])
     wizardlst.append(new_wizard)
     
+print("Wizards:")
 for i in wizardlst:
     print(f"{i.last_name}, {i.first_name}")
+    
+spell_lst = []
+
+try:
+    spell_req = requests.get("https://wizard-world-api.herokuapp.com/spells/")
+except:
+    print("could not connect to API")
+    exit(1)
+
+spells_json = spell_req.json()
+
+for i in spells_json:
+    new_spell = Spell(i["id"],i["name"],i["incantation"],i["effect"],i["canBeVerbal"],i["type"],i["light"],i["creator"])
+    spell_lst.append(new_spell)
+    
+print("\nSpells:")
+for i in spell_lst:
+    print(f"{i.name}: {i.effect}")
